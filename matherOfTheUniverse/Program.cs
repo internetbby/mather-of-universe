@@ -7,55 +7,79 @@ namespace matherOfTheUniverse
         static void Main(string[] args)
         {
             Random generator = new Random();
+            int multipleRandom = generator.Next(1,10);
+            int score = 0;  //startar randomizer och ger score på 0 
 
             List<List<int>> multiplier = new List<List<int>>();
 
+            List <int> factor = new List<int>();
+
+            int factorListAdd=0;
+
+            for (factorListAdd = 0; factorListAdd< 10; factorListAdd++) // gör en loop så factor listan får 1,2,3 etc i sig
+            {
+                factor.Add(factorListAdd);
+            }
+
+            int factorAdd = 0;
+
+            for (factorAdd = 0; factorAdd< 11; factorAdd++) // gör en loop som multipliserar och ger ny lista med produkten av factorAdd * multiplicationfactor
+            {
+                multiplier.Add(new List<int>(MultiplicationFactor(factorAdd)));
+
+            }
+
             
-            int multipleRandom = generator.Next(11);
-            int score = 0;  //startar randomizer och ger score på 0 
 
-            /*System.Console.WriteLine("what is");
-            Console.WriteLine("x * " + multipleRandom + " = " ); 
+            System.Console.WriteLine("what is");
+            Console.Write("x * "); 
+            Console.Write(factor[multipleRandom]);
 
-            string answerX = Console.ReadLine();
+            int listChosen = factor[multipleRandom]; 
+            Console.Write(" = ");
+            Console.Write(multiplier[listChosen][multipleRandom]);
+            Console.WriteLine();
 
-            bool lyckad = TryParse(answerX);
-            while (lyckad == false){
+            string playerAnswerString = Console.ReadLine();
+
+            int playerChoice = PlayerAnswer(playerAnswerString);
+
+            bool lyckad = TryParse(playerAnswerString);
+
+            while (lyckad != true){
                 System.Console.WriteLine("invalid answer");
-                answerX = Console.ReadLine();
-                lyckad = TryParse(answerX);
+                playerAnswerString = Console.ReadLine();
+                playerChoice = PlayerAnswer(playerAnswerString);
+                lyckad = TryParse(playerAnswerString); 
             }
 
 
-            int playerAnswer= PlayerAnswer(answerX);
+            int rightAnswer = multiplier[listChosen][multipleRandom] / factor[multipleRandom] ;
+            int playerInput = multiplier[listChosen][multipleRandom] / playerChoice; 
 
-            int playerResult = playerAnswer * multipleRandom; 
-            int correctanswer = randomizer / multipleRandom; 
-
-            if (playerAnswer!=randomizer){
-                System.Console.WriteLine("you wrote in " + playerResult);
-                System.Console.WriteLine("thats wrong sorry! Correct answer is" + correctanswer);
-
-            }
-            else{
-                System.Console.WriteLine("you got it right! one point added");
+            if (playerChoice == rightAnswer){
+                System.Console.WriteLine("correct! one point added");
                 score++; 
             }
+            else{
+                System.Console.WriteLine("incorrect the right answer was" + rightAnswer);
+                System.Console.WriteLine("you wrote" + playerInput);
+             }
+
 
             Console.ReadLine();
-        }*/
+        }
 
-        static List<int>  MultiplicationFactor(int factor){
+        static List<int>  MultiplicationFactor(int factor){ //multiplicerar och returnerar en lista, i fallet av 3 så ser listan ut 3,6,9 etc
             int secondFactor =1; 
             List<int> result = new List<int>();
-            while(secondFactor != 11){
+            for(secondFactor = 1; secondFactor < 11; secondFactor++){
                 result.Add(factor*secondFactor);
-                secondFactor++; 
             }
-    
+
             return result;
         }
-       /* static int PlayerAnswer (string answerX){ //ger oss spelarens svar som en int 
+       static int PlayerAnswer (string answerX){ //ger oss spelarens svar som en int 
             int playerAnswer;
             bool lyckad = int.TryParse(answerX, out playerAnswer);
             return playerAnswer;
@@ -65,8 +89,6 @@ namespace matherOfTheUniverse
             int x; 
             bool lyckad = int.TryParse(answerX, out x);
             return lyckad;
-        }*/
-        
+        }
     }
-}
 }
