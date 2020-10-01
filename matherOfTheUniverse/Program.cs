@@ -62,8 +62,8 @@ namespace matherOfTheUniverse
                 score++; 
             }
             else{
-                System.Console.WriteLine("incorrect the right answer was" + rightAnswer);
-                System.Console.WriteLine("you wrote" + playerInput);
+                System.Console.WriteLine("incorrect the right answer was " + rightAnswer);
+                System.Console.WriteLine("you wrote " + playerAnswerString+ "which is equal to " + playerInput);
              }
 
 
